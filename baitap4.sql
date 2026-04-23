@@ -1,7 +1,9 @@
-create table user (
-	phone int 
-);
-
-alter table user modify phone varchar(15);
+ALTER TABLE USERS
+ADD Phone_new VARCHAR(15);
+UPDATE USERS
+SET Phone_new = CAST(Phone AS CHAR);
+ALTER TABLE USERS
+DROP COLUMN Phone,
+CHANGE Phone_new Phone VARCHAR(15);
 
 	
