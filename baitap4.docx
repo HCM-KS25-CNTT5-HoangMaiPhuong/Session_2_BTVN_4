@@ -1,7 +1,0 @@
-Phân tích: Bài toán không chỉ là đổi kiểu dữ liệu mà là sửa một thiết kế sai trong hệ thống đang vận hành với 2 triệu bản ghi. Việc lưu số điện thoại bằng INT làm mất số 0 ở đầu, dẫn đến lỗi đăng nhập. Ngoài ra, việc thực hiện ALTER trực tiếp trên bảng lớn có thể gây lock bảng và downtime, ảnh hưởng đến toàn bộ hệ thống.
-
-Đề xuất: Có hai giải pháp. Giải pháp thứ nhất là ALTER trực tiếp cột Phone sang VARCHAR(15), đơn giản nhưng rủi ro cao vì có thể làm gián đoạn hệ thống. Giải pháp thứ hai là migration an toàn: thêm cột mới, chuyển dữ liệu sang cột đó rồi thay thế dần, giúp tránh ảnh hưởng đến hệ thống đang chạy.
-
-So sánh: ALTER trực tiếp có ưu điểm là đơn giản, nhanh nhưng nhược điểm là dễ gây lock bảng, downtime và khó rollback. Migration an toàn phức tạp hơn nhưng ưu điểm là hạn chế tối đa downtime, giảm rủi ro và dễ kiểm soát, phù hợp với môi trường production.
-
-Kết luận: Trong hệ thống lớn đang hoạt động, nên chọn phương án migration an toàn vì đảm bảo tính ổn định và không làm gián đoạn dịch vụ.
