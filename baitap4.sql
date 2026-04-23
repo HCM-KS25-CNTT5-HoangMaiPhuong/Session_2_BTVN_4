@@ -6,4 +6,3 @@ ALTER TABLE USERS
 DROP COLUMN Phone,
 CHANGE Phone_new Phone VARCHAR(15);
 
-	
